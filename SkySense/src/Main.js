@@ -1,6 +1,7 @@
 import React from "react";
 
 import styles from "./Main.scss";
+import Button from "./Button";
 
 let temperature = "27º";
 let hours = "12:00";
@@ -15,18 +16,16 @@ export default function Main() {
         </div>
         <div className={styles.mainDivTxt}>
           <p>
-            <strong>&#128204;{temperature}</strong>
+            <strong>&#128204; {temperature}</strong>
           </p>
           <p>
-            <strong>&#128204;{city}</strong>
+            <strong>&#128204; {city}</strong>
           </p>
           <p>
-            <strong>&#128204;{hours}</strong>
+            <strong>&#128204; {hours}</strong>
           </p>
         </div>
-        <div className={styles}>
-          <button className={styles.btn}>Consultar Clima</button>
-        </div>
+        <Button className={styles.botao} />
       </div>
     </>
   );
