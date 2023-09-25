@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./Main.scss";
-import Button from "./Button";
+import Btn from "./btnDiv";
 
 let temperature = "27º";
 let hours = "12:00";
@@ -25,7 +25,7 @@ export default function Main() {
             <strong>&#128204; {hours}</strong>
           </p>
         </div>
-        <Button className={styles.botao} />
+        <Btn />
       </div>
     </>
   );
