@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import styles from "./Main.scss";
 function btnDiv() {
-  const state = useState();
+  const [inputValue, setInputValue] = useState("");
 
-  function handleChange() {
-    console.log("OK");
+  function handleChange(event) {
+    setInputValue(event.target.value);
+  }
+
+  function handleClick() { 
+    console.log(inputValue)
   }
 
   return (
     <div className={styles.btnDiv}>
-      <input></input> <br/>
-      <button onClick={handleChange} className={styles.btn}>
+      <input value={inputValue} onChange={handleChange} />
+
+      <br />
+
+      <button className={styles.btn} onClick={handleClick}>
         Consultar
       </button>
     </div>
