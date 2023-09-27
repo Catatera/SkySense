@@ -48,7 +48,13 @@ export default function Main() {
               <strong>&#128204; {weatherData.name}</strong>
             </p>
             <p>
-              <strong>&#9200; {new Date().toLocaleTimeString()}</strong>
+              <strong>
+                &#9200;{" "}
+                {new Date().toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })  }
+              </strong>
             </p>
           </>
         ) : (
@@ -57,12 +63,9 @@ export default function Main() {
       </div>
 
       <div className={styles.btnDiv}>
-        <input value={inputValue} onChange={handleChange} />
-
-        <br />
-
+        <input value={inputValue} onChange={handleChange}/>
         <button className={styles.btn} onClick={fetchData}>
-          Consultar
+          &#128269;
         </button>
       </div>
     </div>
