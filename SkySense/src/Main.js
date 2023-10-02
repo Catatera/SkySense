@@ -1,32 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
+import styles from "./Main.module.scss"; // Certifique-se de importar seu arquivo de estilos aqui
 
-import styles from "./Main.scss";
-import Button from "./Button";
+const api = {
+  key: "3ee32176fbc4070662893138e0e9dea6",
+  base: "https://api.openweathermap.org/data/2.5/weather",
+};
 
-let temperature = "27º";
-let hours = "12:00";
-let city = "Cambuí";
+export default function Main({
+  setBackgroundImage,
+  fotoFrio,
+  fotoCalor,
+  fotoPadrao,
+}) {
+  const [inputValue, setInputValue] = useState("");
+  const [weatherData, setWeatherData] = useState(null);
 
-export default function Main() {
+  async function fetchData() {
+    try {
+      const response = await fetch(
+        `${api.base}?q=${inputValue}&lang=pt_br&units=metric&appid=${api.key}`
+      );
+
+      if (!response.ok) {
+        alert("Cidade não encontrada. Por favor, revise sua consulta.");
+      } else {
+        const data = await response.json();
+        setWeatherData(data);
+
+        // Determine a URL da imagem de fundo com base na temperatura
+        let backgroundImageUrl = data.main.temp < 15 ? fotoFrio : fotoCalor;
+
+        // Chame a função setBackgroundImage para atualizar a imagem de fundo no App.js
+        setBackgroundImage(backgroundImageUrl);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar dados do clima:", error);
+    }
+  }
+
+  function handleChange(event) {
+    setInputValue(event.target.value);
+  }
+
   return (
-    <>
-      <div className={styles.main}>
-        <div className={styles.mainDivImg}>
-          <img src="/media/sun.png" className={styles.mainImg}></img>
-        </div>
-        <div className={styles.mainDivTxt}>
-          <p>
-            <strong>&#128204; {temperature}</strong>
-          </p>
-          <p>
-            <strong>&#128204; {city}</strong>
-          </p>
-          <p>
-            <strong>&#128204; {hours}</strong>
-          </p>
-        </div>
-        <Button className={styles.botao} />
+    <div className={styles.main}>
+      <div className={styles.mainDivTxt}>
+        {weatherData ? (
+          <>
+            <p>
+              <strong> &#127777; {weatherData.main.temp}°C</strong>
+            </p>
+            <p>
+              <strong>&#128204; {weatherData.name}</strong>
+            </p>
+            <p>
+              <strong>
+                &#9200;{" "}
+                {new Date().toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </strong>
+            </p>
+          </>
+        ) : (
+          <p>Digite a cidade no campo abaixo</p>
+        )}
       </div>
-    </>
+
+      <div className={styles.btnDiv}>
+        <input value={inputValue} onChange={handleChange} />
+        <button className={styles.btn} onClick={fetchData}>
+          &#128269;
+        </button>
+      </div>
+    </div>
   );
 }
