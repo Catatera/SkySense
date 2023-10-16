@@ -1,13 +1,13 @@
 :root {
   --background-cold: url("../public/media/fotoFrio.webp");
   --background-hot: url("../public/media/fotoCalor.webp");
-  --background-default: url("../public/media/fotoPadrao.webp"); // Adicione a imagem padrão aqui
+  --background-default: url("../public/media/fotoPadrao.webp"); 
 }
 
 .container{
   width: 100vw;
   height: 100vh;
-  background-image: var(--background-default); // Use a imagem padrão aqui
+  background-image: var(--background-default); 
   background-size: cover;
   background-repeat: no-repeat;
 }

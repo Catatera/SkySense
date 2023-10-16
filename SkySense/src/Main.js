@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import styles from "./Main.module.scss"; // Certifique-se de importar seu arquivo de estilos aqui
-
+import styles from "./Main.module.scss";
 const api = {
   key: "3ee32176fbc4070662893138e0e9dea6",
   base: "https://api.openweathermap.org/data/2.5/weather",
@@ -27,10 +26,8 @@ export default function Main({
         const data = await response.json();
         setWeatherData(data);
 
-        // Determine a URL da imagem de fundo com base na temperatura
         let backgroundImageUrl = data.main.temp < 15 ? fotoFrio : fotoCalor;
 
-        // Chame a função setBackgroundImage para atualizar a imagem de fundo no App.js
         setBackgroundImage(backgroundImageUrl);
       }
     } catch (error) {
